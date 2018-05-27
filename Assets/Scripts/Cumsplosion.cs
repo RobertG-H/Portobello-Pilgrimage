@@ -19,17 +19,17 @@ public class Cumsplosion : MonoBehaviour {
 		playerCollider = GetComponent<CircleCollider2D>();
 		//playerCollider.radius = 0.5f;
 
-		coroutine = WaitAndPrint(2.0f);
+		coroutine = wait(2.0f);
 		coroutine2 = radius(0.1f);
         StartCoroutine(coroutine);
 		StartCoroutine(coroutine2);
 	}
 
-	private IEnumerator WaitAndPrint(float waitTime)
+	private IEnumerator wait(float waitTime)
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds (waitTime);
             canCumsplode = true;
         }
     }
@@ -37,11 +37,11 @@ public class Cumsplosion : MonoBehaviour {
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds (waitTime);
 			if ( radiusLrg ){
 				radiusLrg = !radiusLrg;
-				Debug.Log("read");
-				playerCollider.radius = 0.5f;
+				//Debug.Log("read");
+				playerCollider.radius = 0.19f;
 			}
 			
         }
@@ -54,7 +54,7 @@ public class Cumsplosion : MonoBehaviour {
 			Vector2 velocity = ( gameObject.GetComponent<Rigidbody2D>().velocity + new Vector2(10, 10) ) * 3 ;
 			gameObject.GetComponent<Rigidbody2D>().AddForce(velocity, ForceMode2D.Impulse);
 		} else if ( gameObject.tag == "Player" && canCumsplode && Input.GetButtonDown("Cumsplode")){
-			playerCollider.radius = 4.0f;
+			playerCollider.radius = 1.0f;
 			canCumsplode = false;
 			radiusLrg = true;
 		}
