@@ -35,7 +35,7 @@ public class Mushroom : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds (Random.Range (0.5f, 3f));
             RBody.AddForce (new Vector2 (0f, 4f), ForceMode2D.Impulse);
-            Debug.Log ("JUMPING");
+            //Debug.Log ("JUMPING");
         }
 
     }

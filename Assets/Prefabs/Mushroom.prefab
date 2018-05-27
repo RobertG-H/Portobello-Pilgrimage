@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 58909792304157872}
   - component: {fileID: 95745397594435000}
   - component: {fileID: 114373434525345730}
+  - component: {fileID: 114634514532899584}
   m_Layer: 0
   m_Name: Mushroom
-  m_TagString: Player
+  m_TagString: Fam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,10 +56,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.7
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 0739ef4e8192310428d5e176bed9f12e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -109,6 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RBody: {fileID: 50447859909464676}
+--- !u!114 &114634514532899584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832823805555856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc577115b71c44d10aae29acaf7cb34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounciness: 0
 --- !u!212 &212303661126147396
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Update ()
     {
         Anim.speed = Mathf.Min (RBody.velocity.magnitude * AnimationSpeedScaler, 1.7f);
-      //  Debug.Log (RBody.velocity);
+      //  //Debug.Log (RBody.velocity);
     }
 
     void FixedUpdate ()
@@ -39,10 +39,10 @@ public class PlayerController : MonoBehaviour
         int h = Physics2D.RaycastNonAlloc (transform.position, -Vector2.up, hits); //cast downwards
         if (h > 1)
         { //if we hit something do stuff
-          // Debug.Log (hits [1].normal);
+          // //Debug.Log (hits [1].normal);
             movementDirection = new Vector2 (hits [1].normal.y, -hits [1].normal.x); // Note y is flipped
                                                                                      //  angle = Mathf.Abs (Mathf.Atan2 (hits [1].normal.x, hits [1].normal.y) * Mathf.Rad2Deg); //get angle
-                                                                                     //Debug.Log ("Moving in: " + movementDirection);
+                                                                                     ////Debug.Log ("Moving in: " + movementDirection);
 
         }
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (horizontal > 0 && isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
         {
             RBody.AddForce (movementDirection * MoveForce, ForceMode2D.Impulse);
-            Debug.Log ("Adding force: " + movementDirection * MoveForce);
+            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
             isFacingRight = 1;
         }
 
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         else if (horizontal < 0 && isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
         {
             RBody.AddForce (-movementDirection * MoveForce, ForceMode2D.Impulse);
-            Debug.Log ("Adding force: " + movementDirection * MoveForce);
+            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
             isFacingRight = -1;
         }
 
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D collision)
     {
-        Debug.Log (collision); Debug.Log ("Leaving ground ");
+        //Debug.Log (collision); //Debug.Log ("Leaving ground ");
         if (collision.gameObject.tag == "Ground")
         {
             isOnGround = true;
