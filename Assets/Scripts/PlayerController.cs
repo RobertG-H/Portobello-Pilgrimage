@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private bool hasJump = true;
     private bool isOnGround = true;
+    private bool playerIsAtEnd = false;
     private int isFacingRight = 1;
 
     void Start ()
@@ -33,6 +34,10 @@ public class PlayerController : MonoBehaviour
     {
         Anim.speed = Mathf.Min (RBody.velocity.magnitude * AnimationSpeedScaler, 1.7f);
         //  //Debug.Log (RBody.velocity);
+
+        if ( playerIsAtEnd && Input.GetButton("restart") ){
+            Application.LoadLevel(Application.loadedLevel);
+        }
     }
 
     void FixedUpdate ()
@@ -92,6 +97,10 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
             hasJump = true;
+        }
+
+        if (collision.gameObject.tag == "ending"){
+            playerIsAtEnd = true;
         }
     }
 
