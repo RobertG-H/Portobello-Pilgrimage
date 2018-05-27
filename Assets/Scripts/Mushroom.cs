@@ -28,7 +28,7 @@ public class Mushroom : MonoBehaviour
     void Update ()
     {
 
-        if(doOnce && Gm.IsPlaying)
+        if(doOnce)
         {
             float force = Random.Range(0.1f, 0.2f);
             RBody.AddForce (new Vector2 (force, force), ForceMode2D.Impulse);

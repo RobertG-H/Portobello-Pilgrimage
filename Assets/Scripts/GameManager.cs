@@ -8,11 +8,9 @@ public class GameManager : MonoBehaviour
     public AudioSource Audio;
     public bool Debug;
 
-    public bool IsPlaying { get; set; }
 
     private void Awake ()
     {
-        IsPlaying = false;
     }
 
     private void Start ()
@@ -38,7 +36,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame ()
     {
-        IsPlaying = true;
         Audio.Play ();
         // Send event for starting game (Maybe?)
     }
