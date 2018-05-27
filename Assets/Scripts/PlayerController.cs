@@ -124,13 +124,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D collision)
     {
-        //Debug.Log (collision); //Debug.Log ("Leaving ground ");
-        if (collision.gameObject.tag == "Ground")
-        {
-            isOnGround = true;
-            hasJump = true;
-        }
-
         if (collision.gameObject.tag == "ending"){
             playerIsAtEnd = true;
         }
