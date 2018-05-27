@@ -88,7 +88,7 @@ public class Mushroom : MonoBehaviour
             yield return new WaitForSeconds (1.5f);
             //Debug.Log(movementFrequency);
             Vector3 newPos = RBody.transform.position;
-            Debug.Log(Mathf.Abs(pos.x - newPos.x));
+           // Debug.Log(Mathf.Abs(pos.x - newPos.x));
             
             if (Mathf.Abs(pos.x - newPos.x) < 0.5 && Mathf.Abs(pos.y - newPos.y) < 0.5) {
                 stuck = true;

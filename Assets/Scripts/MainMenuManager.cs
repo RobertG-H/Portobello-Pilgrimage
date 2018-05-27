@@ -18,7 +18,6 @@ public class MainMenuManager : MonoBehaviour
         if (Input.GetKeyDown ("space"))
         {
             Audio.Stop ();
-            Gm.StartGame ();
         }
     }
 }
