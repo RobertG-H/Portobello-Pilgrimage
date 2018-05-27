@@ -5,19 +5,25 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     public Rigidbody2D RBody;
+    public GameManager Gm;
+
+    bool doOnce = true;
     // Use this for initialization
     void Start ()
     {
         RBody = GetComponent<Rigidbody2D> ();
-
-        StartCoroutine (AddForce ());
-        StartCoroutine (RandUp ());
+        Gm = FindObjectOfType<GameManager> ().GetComponent<GameManager> ();
     }
 
     // Update is called once per frame
     void Update ()
     {
-
+        if(doOnce && Gm.IsPlaying)
+        {
+            StartCoroutine (AddForce ());
+            StartCoroutine (RandUp ());
+            doOnce = false;
+        }
     }
 
     IEnumerator AddForce ()
@@ -43,7 +49,7 @@ public class Mushroom : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            RBody.AddForce (new Vector2 (2f, 0), ForceMode2D.Impulse);
+            //RBody.AddForce (new Vector2 (2f, 0), ForceMode2D.Impulse);
         }
     }
 }

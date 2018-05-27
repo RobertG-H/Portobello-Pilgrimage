@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D RBody;
     public Animator Anim;
+    public GameManager Gm;
 
     public float JumpAmount;
     public float MoveForce;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         RBody = GetComponent<Rigidbody2D> ();
         Anim = GetComponent<Animator> ();
+        Gm = FindObjectOfType<GameManager> ().GetComponent<GameManager> ();
         movementDirection = new Vector2 (0, 1f);
     }
 
@@ -35,47 +37,48 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate ()
     {
-        RaycastHit2D [] hits = new RaycastHit2D [2];
-        int h = Physics2D.RaycastNonAlloc (transform.position, -Vector2.up, hits); //cast downwards
-        if (h > 1)
-        { //if we hit something do stuff
-          // //Debug.Log (hits [1].normal);
-            movementDirection = new Vector2 (hits [1].normal.y, -hits [1].normal.x); // Note y is flipped
-                                                                                     //  angle = Mathf.Abs (Mathf.Atan2 (hits [1].normal.x, hits [1].normal.y) * Mathf.Rad2Deg); //get angle
-                                                                                     ////Debug.Log ("Moving in: " + movementDirection);
-
-        }
-
-        if (Input.GetButton ("Jump") && hasJump)
+        if (Gm.IsPlaying)
         {
-            RBody.AddForce (new Vector2 (0f, JumpAmount), ForceMode2D.Impulse);
-            hasJump = false;
+            RaycastHit2D [] hits = new RaycastHit2D [2];
+            int h = Physics2D.RaycastNonAlloc (transform.position, -Vector2.up, hits); //cast downwards
+            if (h > 1)
+            { //if we hit something do stuff
+              // //Debug.Log (hits [1].normal);
+                movementDirection = new Vector2 (hits [1].normal.y, -hits [1].normal.x); // Note y is flipped
+                                                                                         //  angle = Mathf.Abs (Mathf.Atan2 (hits [1].normal.x, hits [1].normal.y) * Mathf.Rad2Deg); //get angle
+                                                                                         ////Debug.Log ("Moving in: " + movementDirection);
+
+            }
+
+            if (Input.GetButton ("Jump") && hasJump)
+            {
+                RBody.AddForce (new Vector2 (0f, JumpAmount), ForceMode2D.Impulse);
+                hasJump = false;
+            }
+
+            float horizontal = Input.GetAxisRaw ("Horizontal");
+
+            // Moving Right.
+            if (horizontal > 0 && isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
+            {
+                RBody.AddForce (movementDirection * MoveForce, ForceMode2D.Impulse);
+                //Debug.Log ("Adding force: " + movementDirection * MoveForce);
+                isFacingRight = 1;
+            }
+
+            // Moving left.
+            else if (horizontal < 0 && isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
+            {
+                RBody.AddForce (-movementDirection * MoveForce, ForceMode2D.Impulse);
+                //Debug.Log ("Adding force: " + movementDirection * MoveForce);
+                isFacingRight = -1;
+            }
+
+            if (RBody.velocity.x > 0)
+                Anim.SetBool ("IsMovingRight", true);
+            else
+                Anim.SetBool ("IsMovingRight", false);
         }
-
-        float horizontal = Input.GetAxisRaw ("Horizontal");
-
-        // Moving Right.
-        if (horizontal > 0 && isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
-        {
-            RBody.AddForce (movementDirection * MoveForce, ForceMode2D.Impulse);
-            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
-            isFacingRight = 1;
-        }
-
-        // Moving left.
-        else if (horizontal < 0 && isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
-        {
-            RBody.AddForce (-movementDirection * MoveForce, ForceMode2D.Impulse);
-            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
-            isFacingRight = -1;
-        }
-
-        if (RBody.velocity.x > 0)
-            Anim.SetBool ("IsMovingRight", true);
-        else
-            Anim.SetBool ("IsMovingRight", false);
-
-
     }
 
     IEnumerator SporeBlastReset ()

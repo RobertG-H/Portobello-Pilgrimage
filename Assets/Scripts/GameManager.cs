@@ -5,12 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject [] AllPlayers;
-    public GameObject Player;
-    public GameObject Floor;
+    public AudioSource Audio;
     public bool Debug;
+
+    public bool IsPlaying { get; set; }
+
+    private void Awake ()
+    {
+        IsPlaying = false;
+    }
 
     private void Start ()
     {
+        Audio = GetComponent<AudioSource> ();
         AllPlayers = GameObject.FindGameObjectsWithTag ("Player");
     }
 
@@ -20,7 +27,6 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown ("r"))
             {
-
                 foreach (GameObject player in AllPlayers)
                 {
                     player.transform.position = new Vector3 (0f, 0f, 0f);
@@ -28,11 +34,12 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
 
-        if (Player.transform.position.x > 22)
-        {
-            GameObject.Destroy (Floor);
-        }
-
+    public void StartGame ()
+    {
+        IsPlaying = true;
+        Audio.Play ();
+        // Send event for starting game (Maybe?)
     }
 }
