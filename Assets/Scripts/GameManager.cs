@@ -11,12 +11,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake ()
     {
+        Audio = GetComponent<AudioSource> ();
+        AllPlayers = GameObject.FindGameObjectsWithTag ("Player");
     }
 
     private void Start ()
     {
-        Audio = GetComponent<AudioSource> ();
-        AllPlayers = GameObject.FindGameObjectsWithTag ("Player");
+        StartCoroutine (StartSongDelay ());
     }
 
     void LateUpdate ()
@@ -34,9 +35,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame ()
+    IEnumerator StartSongDelay ()
     {
+        yield return new WaitForSeconds (1f);
         Audio.Play ();
-        // Send event for starting game (Maybe?)
     }
 }

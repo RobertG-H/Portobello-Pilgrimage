@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour
     public Animator Anim;
     public GameManager Gm;
 
+    public AudioClip Jump;
+    public AudioClip Move;
+    public AudioClip [] Deaths;
+    public AudioClip Cumsplosion;
+    public AudioSource Audio;
+
+
     public float JumpAmount;
     public float MoveForce;
     public float AnimationSpeedScaler;
@@ -17,7 +24,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementDirection;
     float angle;
 
-    private bool hasJump = true;
     private bool isOnGround = true;
     private bool playerIsAtEnd = false;
     private int isFacingRight = 1;
@@ -28,6 +34,7 @@ public class PlayerController : MonoBehaviour
         Anim = GetComponent<Animator> ();
         Gm = FindObjectOfType<GameManager> ().GetComponent<GameManager> ();
         movementDirection = new Vector2 (0, 1f);
+        Audio = GetComponent<AudioSource> ();
     }
 
     private void Update ()
@@ -44,20 +51,31 @@ public class PlayerController : MonoBehaviour
     {
 
         RaycastHit2D [] hits = new RaycastHit2D [2];
-        int h = Physics2D.RaycastNonAlloc (transform.position, -Vector2.up, hits); //cast downwards
+        int h = Physics2D.RaycastNonAlloc (transform.position, -Vector2.up, hits, 0.5f); //cast downwards
+        Debug.DrawRay (transform.position, -Vector2.up, Color.red);
+        //Debug.Log (hits[0].normal);
         if (h > 1)
         { //if we hit something do stuff
-          // //Debug.Log (hits [1].normal);
+            isOnGround = true;
             movementDirection = new Vector2 (hits [1].normal.y, -hits [1].normal.x); // Note y is flipped
-                                                                                     //  angle = Mathf.Abs (Mathf.Atan2 (hits [1].normal.x, hits [1].normal.y) * Mathf.Rad2Deg); //get angle
-                                                                                     ////Debug.Log ("Moving in: " + movementDirection);
+            //angle = Mathf.Abs (Mathf.Atan2 (hits [1].normal.x, hits [1].normal.y) * Mathf.Rad2Deg); //get angle
 
         }
-
-        if (Input.GetButton ("Jump") && hasJump)
+        else
         {
+            isOnGround = false;
+            Debug.Log ("IN AIR");
+        }
+
+
+
+
+        if (Input.GetButtonDown ("Jump") && isOnGround)
+        {
+            Audio.clip = Jump;
+            Audio.time = 0.5f;
+            Audio.Play ();
             RBody.AddForce (new Vector2 (0f, JumpAmount), ForceMode2D.Impulse);
-            hasJump = false;
         }
 
         float horizontal = Input.GetAxisRaw ("Horizontal");
@@ -66,17 +84,31 @@ public class PlayerController : MonoBehaviour
         if (horizontal > 0 && isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
         {
             RBody.AddForce (movementDirection * MoveForce, ForceMode2D.Impulse);
-            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
-            isFacingRight = 1;
+           // Debug.Log (movementDirection);
+            Debug.DrawRay (transform.position, movementDirection, Color.green);
         }
 
         // Moving left.
         else if (horizontal < 0 && isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
         {
             RBody.AddForce (-movementDirection * MoveForce, ForceMode2D.Impulse);
-            //Debug.Log ("Adding force: " + movementDirection * MoveForce);
-            isFacingRight = -1;
+           // Debug.Log (-movementDirection);
+            Debug.DrawRay (transform.position, -movementDirection, Color.green);
         }
+
+        // Moving Right air.
+        else if (horizontal > 0 && !isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
+        {
+           RBody.AddForce (movementDirection * MoveForce * 5.2f, ForceMode2D.Force);
+        }
+
+        // Moving left air.
+        else if (horizontal < 0 && !isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
+        {
+            RBody.AddForce (-movementDirection * MoveForce * 5.2f, ForceMode2D.Force);
+        }
+
+
 
         if (RBody.velocity.x > 0)
             Anim.SetBool ("IsMovingRight", true);
@@ -104,11 +136,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D (Collision2D collision)
+    public void Death ()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            //  isOnGround = false;
-        }
+        Audio.clip = Deaths [ Mathf.FloorToInt (Random.Range (0f, 3f))] ;
+        Audio.Play ();
     }
 }

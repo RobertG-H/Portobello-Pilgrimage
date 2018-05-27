@@ -7,14 +7,17 @@ public class SneakySlag : MonoBehaviour
 
     public GameObject [] Waypoints;
     public Rigidbody2D RBody;
+    public AudioSource Audio;
+
+    public AudioClip Moving;
+    public AudioClip Eating;
 
     public float Speed;
 
     private int waypointIndex;
     private bool atWaypoint;
 
-    private float velocityX = 0f;
-    private float velocityY = 0f;
+    private Vector2 velocity;
 
     private float directionX = 0f;
     private float directionY = 0f;
@@ -23,6 +26,9 @@ public class SneakySlag : MonoBehaviour
     {
         RBody = GetComponent<Rigidbody2D> ();
         atWaypoint = true;
+        Audio = GetComponent<AudioSource> ();
+        Audio.clip = Moving;
+        Audio.Play ();
     }
 
     void Update ()
@@ -33,11 +39,10 @@ public class SneakySlag : MonoBehaviour
         if (atWaypoint)
         {
             atWaypoint = false;
-            velocityX = directionX;
-            velocityY = directionY;
+            velocity = new Vector2 (directionX, directionY).normalized * Speed;
         }
 
-        if (Mathf.Abs (directionX) <= 0.5f && Mathf.Abs (directionY) <= 0.5f)
+        if (Mathf.Abs (directionX) <= 1f && Mathf.Abs (directionY) <= 1f)
         {
             // At waypoint so stop moving
             RBody.velocity = new Vector2 (0, 0);
@@ -50,16 +55,22 @@ public class SneakySlag : MonoBehaviour
             atWaypoint = true;
         }
 
-        RBody.velocity = new Vector2 (velocityX * Speed, velocityY * Speed);
+        RBody.velocity = velocity;
     }
 
-    void OnCollisionEnter2D (Collision2D collision)
+    void OnTriggerEnter2D (Collider2D other)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Fam")
+        if (other.gameObject.tag == "Player")
         {
             //Destroy(collision.gameObject);
             Debug.Log ("Dead homie");
+            Audio.clip = Eating;
+            Audio.Play ();
+        }
+
+        if (other.gameObject.tag == "Fam")
+        {
+            Destroy (other.gameObject);
         }
     }
-
 }
