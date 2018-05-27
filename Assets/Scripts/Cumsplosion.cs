@@ -17,7 +17,7 @@ public class Cumsplosion : MonoBehaviour {
 		canCumsplode = true;
 		radiusLrg = false;
 		playerCollider = GetComponent<CircleCollider2D>();
-		playerCollider.radius = 0.5f;
+		//playerCollider.radius = 0.5f;
 
 		coroutine = WaitAndPrint(2.0f);
 		coroutine2 = radius(0.1f);

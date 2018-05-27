@@ -2,40 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SneakySlag : MonoBehaviour {
+public class SneakySlag : MonoBehaviour
+{
 
+    public GameObject [] Waypoints;
+    public Rigidbody2D RBody;
 
-	private IEnumerator coroutine;
-	// Use this for initialization
-	void Start () {
-		coroutine = WaitAndPrint(5.0f);
-        StartCoroutine(coroutine);
-	}
-	private IEnumerator WaitAndPrint(float waitTime)
+    public float Speed;
+
+    private int waypointIndex;
+    private bool atWaypoint;
+
+    private float velocityX = 0f;
+    private float velocityY = 0f;
+
+    private float directionX = 0f;
+    private float directionY = 0f;
+
+    void Start ()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(waitTime);
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(70, 70), ForceMode2D.Impulse);
-        }
+        RBody = GetComponent<Rigidbody2D> ();
+        atWaypoint = true;
     }
-	// Update is called once per frame
-	void Update () {
-		if ( gameObject.GetComponent<Rigidbody2D>().velocity.x == 0 ) {
-			Debug.Log("woo");
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(70, 0), ForceMode2D.Impulse);
-		}
-		if ( gameObject.GetComponent<Rigidbody2D>().velocity.y == 0 ) {
-			Debug.Log("woo");
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 70), ForceMode2D.Impulse);
-		}
-	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-        if ( collision.gameObject.tag == "Player" || collision.gameObject.tag == "Fam" )  {
-			//Destroy(collision.gameObject);
-			Debug.Log("Dead homie");
-		}
+    void Update ()
+    {
+        directionX = Waypoints [waypointIndex].transform.position.x - transform.position.x;
+        directionY = Waypoints [waypointIndex].transform.position.y - transform.position.y;
+
+        if (atWaypoint)
+        {
+            atWaypoint = false;
+            velocityX = directionX;
+            velocityY = directionY;
+        }
+
+        if (Mathf.Abs (directionX) <= 0.5f && Mathf.Abs (directionY) <= 0.5f)
+        {
+            // At waypoint so stop moving
+            RBody.velocity = new Vector2 (0, 0);
+            Debug.Log ("AT WAYPOINT ");
+            if (waypointIndex < Waypoints.Length - 1)
+            {
+                waypointIndex++;
+            }
+
+            atWaypoint = true;
+        }
+
+        RBody.velocity = new Vector2 (velocityX * Speed, velocityY * Speed);
+    }
+
+    void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Fam")
+        {
+            //Destroy(collision.gameObject);
+            Debug.Log ("Dead homie");
+        }
     }
 
 }

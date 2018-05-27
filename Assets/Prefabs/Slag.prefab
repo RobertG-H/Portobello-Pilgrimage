@@ -37,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029322706989558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.11, y: 2.66, z: -0.3905419}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.84, y: 3.07, z: -0.3905419}
+  m_LocalScale: {x: 6.64, y: 22.11, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,18 +75,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0061787367, y: 0.034415722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.46795967, y: 0.41417783}
-    oldSize: {x: 1.63, y: 1.63}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0041841, y: 1.0041841}
     newSize: {x: 1.63, y: 1.63}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 2}
+  m_Size: {x: 1.0302732, y: 0.9823513}
   m_EdgeRadius: 0
 --- !u!114 &114475096469925730
 MonoBehaviour:
@@ -99,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7483718d557644355a1fb9e1bdd08f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  RBody: {fileID: 50610397840345488}
+  Speed: 0.5
 --- !u!212 &212495602313538636
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -134,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e4466e984d0573b4b93389e7f2527cb1, type: 3}
+  m_Sprite: {fileID: 21300008, guid: ef505efaebbd5fa418d2aebf5050b581, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
