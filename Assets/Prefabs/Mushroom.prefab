@@ -25,10 +25,25 @@ GameObject:
   - component: {fileID: 95745397594435000}
   - component: {fileID: 114373434525345730}
   - component: {fileID: 114634514532899584}
-  - component: {fileID: 82097364217037442}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Fam
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1963164781913200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4893894277061168}
+  - component: {fileID: 108892853075487108}
+  m_Layer: 0
+  m_Name: Point Light (1)
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,8 +57,22 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.63, y: 2.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4893894277061168}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4893894277061168
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963164781913200}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176235673745992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50447859909464676
@@ -81,101 +110,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.07570732}
   serializedVersion: 2
   m_Radius: 0.18260252
---- !u!82 &82097364217037442
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1832823805555856}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.822
-  m_Pitch: 1.16
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 207
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0.302
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!95 &95745397594435000
 Animator:
   serializedVersion: 3
@@ -194,6 +128,42 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!108 &108892853075487108
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963164781913200}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 0
+  m_Color: {r: 0.80833924, g: 0.990566, b: 0.91026163, a: 1}
+  m_Intensity: 1
+  m_Range: 4.5
+  m_SpotAngle: 90
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294966527
+  m_Lightmapping: 2
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 586.4
+  m_ShadowAngle: 0
 --- !u!114 &114373434525345730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,25 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RBody: {fileID: 50447859909464676}
-  Gm: {fileID: 0}
-  Audio: {fileID: 82097364217037442}
-  Jump: {fileID: 8300000, guid: 477ba74f4282d864da19cfbf342257bf, type: 3}
-  Deaths:
-  - {fileID: 8300000, guid: f71773027638f5f4bbd0ab40455467b0, type: 3}
-  - {fileID: 8300000, guid: 107ba4d836751bb4188ab457e6d6fa0c, type: 3}
-  - {fileID: 8300000, guid: ecb32ca9f03cb2343a8cad00524b2786, type: 3}
-  - {fileID: 8300000, guid: e9f1badc83adaeb4284b27ae8111e76b, type: 3}
-  MushSounds:
-  - {fileID: 8300000, guid: 112de93564783d044bc985a0b1f758bb, type: 3}
-  - {fileID: 8300000, guid: 4f80cb7faf5497c4bb046297cf4e3dae, type: 3}
-  - {fileID: 8300000, guid: 9a36806d03a4cc74c81c342de2dfc58e, type: 3}
-  - {fileID: 8300000, guid: ac5b18c77c2c15a4ea3f1d3df002b84a, type: 3}
-  - {fileID: 8300000, guid: a8114358a191024458fbcea2a204ba8c, type: 3}
-  - {fileID: 8300000, guid: 8c58ea37f738e4345b26701d0661437d, type: 3}
-  - {fileID: 8300000, guid: e6d5f0fb4fd8a834b86f1fc75071475f, type: 3}
-  - {fileID: 8300000, guid: a478f285d1b93a547b81d5d47c799925, type: 3}
-  - {fileID: 8300000, guid: 5c3d7ad37f1ef8243af7c31dced45ba3, type: 3}
-  continualForce: {x: 0, y: 0}
 --- !u!114 &114634514532899584
 MonoBehaviour:
   m_ObjectHideFlags: 1

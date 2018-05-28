@@ -63,7 +63,6 @@ public class SneakySlag : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Destroy(collision.gameObject);
-            other.gameObject.GetComponent<PlayerController> ().Death ();
             Debug.Log ("Dead homie");
             Audio.clip = Eating;
             Audio.Play ();
@@ -71,7 +70,7 @@ public class SneakySlag : MonoBehaviour
 
         if (other.gameObject.tag == "Fam")
         {
-            other.gameObject.GetComponent<Mushroom> (). Death ();
+            Destroy (other.gameObject);
         }
     }
 }

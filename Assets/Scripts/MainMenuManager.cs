@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown ("space"))
         {
-            Application.LoadLevel ("Level1");
+            Audio.Stop ();
         }
     }
 }

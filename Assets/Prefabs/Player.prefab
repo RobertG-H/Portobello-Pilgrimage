@@ -817,13 +817,9 @@ MonoBehaviour:
   Gm: {fileID: 0}
   Jump: {fileID: 8300000, guid: 477ba74f4282d864da19cfbf342257bf, type: 3}
   Move: {fileID: 0}
-  Deaths:
-  - {fileID: 8300000, guid: f71773027638f5f4bbd0ab40455467b0, type: 3}
-  - {fileID: 8300000, guid: 107ba4d836751bb4188ab457e6d6fa0c, type: 3}
-  - {fileID: 8300000, guid: ecb32ca9f03cb2343a8cad00524b2786, type: 3}
-  - {fileID: 8300000, guid: e9f1badc83adaeb4284b27ae8111e76b, type: 3}
-  Cumsplosion: {fileID: 8300000, guid: 0d0dd9ae290aea248951784dbeb5b611, type: 3}
-  Audio: {fileID: 82679986132698282}
+  Deaths: []
+  Cumsplosion: {fileID: 0}
+  Audio: {fileID: 0}
   JumpAmount: 6
   MoveForce: 1
   AnimationSpeedScaler: 0.5

@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     public void Death ()
     {
-        Audio.clip = Deaths [Mathf.FloorToInt (Random.Range (0f, (float) Deaths.Length))];
+        Audio.clip = Deaths [ Mathf.FloorToInt (Random.Range (0f, 3f))] ;
         Audio.Play ();
     }
 }

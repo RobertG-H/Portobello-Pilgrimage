@@ -6,15 +6,6 @@ public class Mushroom : MonoBehaviour
 {
     public Rigidbody2D RBody;
     public GameManager Gm;
-
-    public AudioSource Audio;
-    public AudioClip Jump;
-
-    public AudioClip [] Deaths;
-
-    public AudioClip [] MushSounds;
-
-
     private bool touchingFloor = false;
     public Vector2 continualForce = new Vector2 (0.0f, 0.0f);
     private float movementFrequency;
@@ -24,32 +15,30 @@ public class Mushroom : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-
+        
         RBody = GetComponent<Rigidbody2D> ();
         Gm = FindObjectOfType<GameManager> ().GetComponent<GameManager> ();
         Vector2 initForce = new Vector2 (Random.Range (0.5f, 1.5f), Random.Range (0.5f, 1.5f));
         movementFrequency = Random.Range (0.5f, 1.0f);
         continualForce = initForce;
         pos = RBody.transform.position;
-        Audio = GetComponent<AudioSource> ();
     }
 
     // Update is called once per frame
     void Update ()
     {
 
-        if (doOnce)
+        if(doOnce)
         {
-            float force = Random.Range (0.1f, 0.2f);
+            float force = Random.Range(0.1f, 0.2f);
             RBody.AddForce (new Vector2 (force, force), ForceMode2D.Impulse);
             StartCoroutine (AddForce ());
             StartCoroutine (RandUp ());
-            StartCoroutine (minimumMovement ());
-            StartCoroutine (ifStuck ());
-            StartCoroutine (Sound ());
+            StartCoroutine (minimumMovement());
+            StartCoroutine (ifStuck());
             doOnce = false;
         }
-
+        
     }
 
     IEnumerator AddForce ()
@@ -57,84 +46,60 @@ public class Mushroom : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds (Random.Range (0.5f, 2f));
-
-
-            if (Random.Range (0, 2) % 2 == 0)
-            {
-
-                float force = Random.Range (0.5f, 2f);
+            
+            if( Random.Range(0, 2) % 2 == 0){
+                
+                float force = Random.Range(0.5f, 2f);
                 RBody.AddForce (new Vector2 (force, 0), ForceMode2D.Impulse);
 
             }
-
+            
         }
 
     }
-
-    IEnumerator Sound ()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds (Random.Range (5f, 7f));
-
-            Audio.clip = MushSounds [Mathf.FloorToInt (Random.Range (0f, (float) MushSounds.Length))];
-            Audio.time = 0;
-            Audio.Play ();
-        }
-    }
-
 
     IEnumerator RandUp ()
     {
-        while (true)
-        {
+        while (true) {
             yield return new WaitForSeconds (Random.Range (0.5f, 2f));
 
-            Audio.clip = Jump;
-            Audio.time = 0.5f;
-            //     Audio.Play ();
-            if (Random.Range (0, 2) % 2 == 0 && touchingFloor)
-            {
+            if( Random.Range(0, 2) % 2 == 0 && touchingFloor ){
                 //Debug.Log("Jumping");
-                float force = Random.Range (0.5f, 2f);
+                float force = Random.Range(0.5f, 2f);
                 RBody.AddForce (new Vector2 (0, force), ForceMode2D.Impulse);
                 touchingFloor = false;
-
-            }
+               
+            }  
         }
     }
 
     IEnumerator minimumMovement ()
     {
-        while (true)
-        {
+        while (true) {
             yield return new WaitForSeconds (movementFrequency);
             //Debug.Log(movementFrequency);
-            RBody.AddForce (continualForce, ForceMode2D.Impulse);
+            RBody.AddForce (continualForce, ForceMode2D.Impulse);    
         }
     }
 
     IEnumerator ifStuck ()
     {
-        while (true)
-        {
+        while (true) {
             yield return new WaitForSeconds (1.5f);
             //Debug.Log(movementFrequency);
             Vector3 newPos = RBody.transform.position;
-            // Debug.Log(Mathf.Abs(pos.x - newPos.x));
-
-            if (Mathf.Abs (pos.x - newPos.x) < 0.5 && Mathf.Abs (pos.y - newPos.y) < 0.5)
-            {
+           // Debug.Log(Mathf.Abs(pos.x - newPos.x));
+            
+            if (Mathf.Abs(pos.x - newPos.x) < 0.5 && Mathf.Abs(pos.y - newPos.y) < 0.5) {
                 stuck = true;
-                Debug.Log (stuck);
+                Debug.Log(stuck);
             }
 
-            if (stuck)
-            {
+            if (stuck) {
                 RBody.AddForce (new Vector2 (0.5f, 2.0f), ForceMode2D.Impulse);
                 stuck = false;
-            }
-            pos = newPos;
+            } 
+            pos = newPos;  
         }
     }
 
@@ -145,21 +110,4 @@ public class Mushroom : MonoBehaviour
             touchingFloor = true;
         }
     }
-
-
-    public void Death ()
-    {
-        Audio.clip = Deaths [Mathf.FloorToInt (Random.Range (0f, (float) Deaths.Length))];
-        Audio.Play ();
-        RBody.velocity = new Vector2 (0f, 0f);
-        StopAllCoroutines ();
-        StartCoroutine (Destroy ());
-            
-    }
-    IEnumerator Destroy ()
-    {
-        yield return new WaitForSeconds (0.5f);
-        GameObject.Destroy (gameObject);
-    }
-
 }
