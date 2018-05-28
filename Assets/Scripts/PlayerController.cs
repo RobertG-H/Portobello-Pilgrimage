@@ -42,8 +42,9 @@ public class PlayerController : MonoBehaviour
         Anim.speed = Mathf.Min (RBody.velocity.magnitude * AnimationSpeedScaler, 1.7f);
         //  //Debug.Log (RBody.velocity);
 
-        if ( playerIsAtEnd && Input.GetButton("restart") ){
-            Application.LoadLevel(Application.loadedLevel);
+        if (playerIsAtEnd && Input.GetButton ("restart"))
+        {
+            Application.LoadLevel (Application.loadedLevel);
         }
     }
 
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (horizontal > 0 && isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
         {
             RBody.AddForce (movementDirection * MoveForce, ForceMode2D.Impulse);
-           // Debug.Log (movementDirection);
+            // Debug.Log (movementDirection);
             Debug.DrawRay (transform.position, movementDirection, Color.green);
         }
 
@@ -92,14 +93,14 @@ public class PlayerController : MonoBehaviour
         else if (horizontal < 0 && isOnGround && RBody.velocity.x > MAX_VELOCITY_POS * -1)
         {
             RBody.AddForce (-movementDirection * MoveForce, ForceMode2D.Impulse);
-           // Debug.Log (-movementDirection);
+            // Debug.Log (-movementDirection);
             Debug.DrawRay (transform.position, -movementDirection, Color.green);
         }
 
         // Moving Right air.
         else if (horizontal > 0 && !isOnGround && RBody.velocity.x < MAX_VELOCITY_POS)
         {
-           RBody.AddForce (movementDirection * MoveForce * 5.2f, ForceMode2D.Force);
+            RBody.AddForce (movementDirection * MoveForce * 5.2f, ForceMode2D.Force);
         }
 
         // Moving left air.
@@ -124,14 +125,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D collision)
     {
-        if (collision.gameObject.tag == "ending"){
+        if (collision.gameObject.tag == "ending")
+        {
             playerIsAtEnd = true;
         }
     }
 
     public void Death ()
     {
-        Audio.clip = Deaths [ Mathf.FloorToInt (Random.Range (0f, 3f))] ;
+        Audio.clip = Deaths [Mathf.FloorToInt (Random.Range (0f, (float) Deaths.Length))];
         Audio.Play ();
+        StartCoroutine (RestartGame ());
+        RBody.velocity = new Vector2 (0f, 0f);
+        RBody.freezeRotation = true;
+        RBody.isKinematic = false;
+
+    }
+
+    IEnumerator RestartGame ()
+    {
+        yield return new WaitForSeconds (0.5f);
+        Application.LoadLevel (Application.loadedLevel);
     }
 }

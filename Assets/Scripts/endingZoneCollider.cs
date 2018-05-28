@@ -6,10 +6,14 @@ public class endingZoneCollider : MonoBehaviour {
 
 	public GameObject endingText; // Assign in inspector
     private bool isShowing = false;
+    public GameManager Gm;
+    public AudioSource Audio;
 
 	// Use this for initialization
 	void Start () {
-		endingText.SetActive(isShowing);
+        Gm = FindObjectOfType<GameManager> ().GetComponent<GameManager> ();
+        endingText.SetActive(isShowing);
+        Audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +27,8 @@ public class endingZoneCollider : MonoBehaviour {
         {
             isShowing = true;
             endingText.SetActive(isShowing);
+            Gm.StopMusic ();
+            Audio.Play ();
         }
     }
 }

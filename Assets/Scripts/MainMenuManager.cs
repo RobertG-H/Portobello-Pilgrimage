@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameManager Gm;
+
     public AudioSource Audio;
 
     void Start ()
     {
-        Gm = FindObjectOfType<GameManager> ();
         Audio = GetComponent<AudioSource> ();
     }
 
@@ -17,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown ("space"))
         {
-            Audio.Stop ();
+            Application.LoadLevel ("Level1");
         }
     }
 }

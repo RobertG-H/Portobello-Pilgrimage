@@ -37,7 +37,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartSongDelay ()
     {
-        yield return new WaitForSeconds (1f);
+        yield return new WaitForSeconds (0.1f);
         Audio.Play ();
+    }
+
+    public void StopMusic ()
+    {
+        Audio.Stop ();
     }
 }

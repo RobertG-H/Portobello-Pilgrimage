@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: a085b7e91fdad7548ba88f8bae83920f
+    path: Assets/Scenes/Yeti.unity
+    guid: 10f9aec8cf52ca04f992ea747f3bb419
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 8baf366e9b2113441a536c6df6a8966d
   - enabled: 1
-    path: Assets/Scenes/Yeti.unity
-    guid: 10f9aec8cf52ca04f992ea747f3bb419
+    path: Assets/Scenes/Level1.unity
+    guid: a085b7e91fdad7548ba88f8bae83920f
   m_configObjects: {}
