@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029322706989558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.21, y: 3.94, z: -0.3905419}
+  m_LocalPosition: {x: -7.84, y: 3.07, z: -0.3905419}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4342468228049532}
@@ -287,9 +287,9 @@ MonoBehaviour:
   - {fileID: 0}
   RBody: {fileID: 50610397840345488}
   Audio: {fileID: 82911257139204690}
-  Moving: {fileID: 8300000, guid: ee1cca4af98faff4e948af25a30ed91e, type: 3}
+  Moving: {fileID: 8300000, guid: 8e936f47a5a7edb4e93b79f7973893e3, type: 3}
   Eating: {fileID: 8300000, guid: 722d4ffea551b1546b17324d0574a53f, type: 3}
-  Speed: 0.2
+  Speed: 0.4
 --- !u!212 &212495602313538636
 SpriteRenderer:
   m_ObjectHideFlags: 1
